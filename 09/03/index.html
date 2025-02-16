@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://finger-bone.github.io/baidu-matiji-weekly-contest-2025/09/03/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>二维二进制数 - 百度马蹄集周赛 2025</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/color-brewer.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">百度马蹄集周赛 2025</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" class="nav-link disabled">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../04/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#_1" class="nav-link">二维二进制数</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#_2" class="nav-link">题干</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_3" class="nav-link">思路</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#code" class="nav-link">Code</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="_1">二维二进制数</h1>
+<p>https://www.matiji.net/exam/dohomework/8235/5</p>
+<h2 id="_2">题干</h2>
+<p>小码哥最近在学习二进制数。</p>
+<p>有一天，小码哥想到传统的二进制数都是一维的，是否能定义一种二维的二进制数。</p>
+<p>小码哥将二维二进制数定义为以下形式：</p>
+<ol>
+<li>二维二进制数为一个 0/1 矩阵，下标从 0 开始；</li>
+<li>二维二进制数与正常自然数形成双射关系，不妨记这种关系为 <script type="math/tex">f</script> ；</li>
+<li>定义全0矩阵所对应的整数值为 0，即 <script type="math/tex">f(0)=A</script> ， <script type="math/tex">A</script> 为全 0 矩阵；</li>
+<li>若 <script type="math/tex">f(x)=A</script> , <script type="math/tex">f(x + 1)=B</script>，则 A 与 B 有以下对应关系，我们对 A 的 (0，0) 这一位加一，并进行进位操作，则能得到二维二进制数 B；</li>
+<li>进位操作被定义如下：若 <script type="math/tex">S_{i,j}=1</script> ，并且在这一位上加1时，会发生如下进位：使 <script type="math/tex">S_{i,j}=0</script> ，并在 <script type="math/tex">S_{i + 1,j}=1</script>
+<script type="math/tex">S_{i,j + 1}=1</script> 位上加1。
+小码哥想知道，对于给定的 x ，其对于的二维二进制数为多少，即f（x）为多少，由于二维二进制可能很大，你只需输出f（x）的下标从0到n。</li>
+</ol>
+<h2 id="_3">思路</h2>
+<p>
+<script type="math/tex">n \leq 1000, x \leq 10^{18}</script> ，显然复杂度大概 <script type="math/tex">O(n^2 \log x)</script> 以下。</p>
+<p>
+<script type="math/tex">O(n^2)</script> 可以遍历矩阵一次，也就是可以遍历 <script type="math/tex">O(\log x)</script> 次矩阵。</p>
+<p>显然 <script type="math/tex">f</script> 是同态，因此矩阵和等于数的和。而且得到的的矩阵显然是对称的，因为 <script type="math/tex">f(0)</script> 是对称的，而所有的进位操作也是对称的。</p>
+<p>同时，任意两个矩阵的加法也是显然的：相加后进行进位操作即可。</p>
+<p>因此直接算 <script type="math/tex">f(2^i)</script>，再对 <script type="math/tex">x</script> 二进制分解，就可以得到答案了。复杂度正好是 <script type="math/tex">O(n^2 \log x)</script>。</p>
+<p>要求 <script type="math/tex">f(2^i)</script> 在 <script type="math/tex">O(n^2)</script> 内求出，这个复杂度很宽容，可以直接模拟。</p>
+<h2 id="code">Code</h2>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt; 
+
+using namespace std;
+using ll = long long;
+using Matrix = vector&lt;vector&lt;int&gt;&gt;;
+
+void work(Matrix&amp; m, int x, int y) {
+    int mr = m.size();
+    int mc = m[0].size();
+    if(m[x][y] == 0 || m[x][y] == 1) return;
+    else {
+        int rm = m[x][y] / 2;
+        m[x][y] = m[x][y] % 2;
+        if(x + 1 &lt; mr) {
+            m[x + 1][y] += rm;
+            // logically, should have this line
+            // but actually this line does not do anything
+            // since for adding up two matrices
+            // x, y is upmost two(since previous work has been done)
+            // and adding this line will cause TLE
+            // work(m, x + 1, y);
+        }
+        if(y + 1 &lt; mc) {
+            m[x][y + 1] += rm;
+        }
+    }
+    return;
+}
+
+void mul(Matrix&amp; m) {
+    int mr = m.size();
+    int mc = m[0].size();
+    for(int i = 0; i &lt; mr; ++i) {
+        for(int j = 0;j &lt; mc; ++j) {
+            m[i][j] += m[i][j];
+        }
+    }
+    for(int i = 0; i &lt; mr; ++i) {
+        for(int j = 0;j &lt; mc; ++j) {
+            if(m[i][j] != 0) work(m, i, j);
+        }
+    }
+}
+
+void add(Matrix&amp; to, Matrix&amp; off) {
+    int s = to.size();
+    for(int i = 0; i &lt; s; ++i) {
+        for(int j = 0; j &lt; s; ++j) {
+            to[i][j] += off[i][j];
+            work(to, i, j);
+        }
+    } 
+}
+
+int main( )
+{
+    ll n, x;
+    cin &gt;&gt; n &gt;&gt; x;
+    Matrix m(n + 1, vector&lt;int&gt;(n + 1, 0));
+    m[0][0] = 1;
+    Matrix res(n + 1, vector&lt;int&gt;(n + 1, 0));
+    for(int i = 0; i &lt; n + 1; ++i) {
+        if(x &amp; 1) {
+            add(res, m);
+        }
+        mul(m);
+        x &gt;&gt;= 1;
+        if(x == 0) break;
+    }
+    for(int i = 0; i &lt; n + 1; ++i) {
+        for(int j = 0; j &lt; n + 1; ++j) {
+            printf(&quot;%d &quot;, res[i][j]);
+        }
+        cout &lt;&lt; '\n';
+    }
+
+    return 0;
+}
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/jquery-3.6.0.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

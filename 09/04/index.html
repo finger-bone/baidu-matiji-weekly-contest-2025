@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://finger-bone.github.io/baidu-matiji-weekly-contest-2025/09/04/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>社团活动 - 百度马蹄集周赛 2025</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/color-brewer.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">百度马蹄集周赛 2025</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../03/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../05/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#_1" class="nav-link">社团活动</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#_2" class="nav-link">题干</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_3" class="nav-link">思路</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_4" class="nav-link">代码</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="_1">社团活动</h1>
+<p>https://www.matiji.net/exam/dohomework/8235/4?type=6</p>
+<h2 id="_2">题干</h2>
+<p>小码弟正在组织社团活动。
+社团活动一共有 <script type="math/tex">n</script> 个项目，第 <script type="math/tex">i</script> 个项目将于第 <script type="math/tex">l_i</script> 天到第 <script type="math/tex">r_i</script> 天进行。
+社团中有 <script type="math/tex">m</script> 个社员，第 <script type="math/tex">j</script> 位社员将在第 <script type="math/tex">a</script> 到第 <script type="math/tex">b</script> 天有时间参加项目，一位社员每天可以参加多个项目。
+小码弟想知道每位社员分别最多能完整完成几个项目。</p>
+<h2 id="_3">思路</h2>
+<p>即给定 <script type="math/tex">n</script> 个区间 <script type="math/tex">[l_i, r_i]</script> ，<script type="math/tex">m</script> 个区间 <script type="math/tex">[a_i, b_i]</script>，求每个 <script type="math/tex">[a_i, b_i]</script> 包含的 <script type="math/tex">[l_i, r_i]</script> 区间个数。</p>
+<p>
+<script type="math/tex">n \leq 1e5, m \leq 1e5, r_i \leq 1e5, l_i \leq 1e5</script> ，复杂度大概是 <script type="math/tex">O((n + m) log (n + m))</script> 的形式。线性时间复杂度看起来不太可能，因此应当有 <script type="math/tex">log</script> 项。 <script type="math/tex">log</script> 项这里应该是线段树或者树状数组。这里用树状数组做。</p>
+<p>对于每一个查询，将所有满足 <script type="math/tex">l_i \geq a_i</script> 的项目放入树状数组，然后统计满足 <script type="math/tex">r_i \leq b_i</script> 的项目个数。这里的放入是对右端点进行计数，后一步则是指区间求和。</p>
+<p>这样会导致平方乘对数形式的复杂度。考虑先把项目和查询都按左端点排序，这样每次添加项目时，不需要遍历记录，只要从上次结束的项目继续添加即可。</p>
+<h2 id="_4">代码</h2>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+// 项目结构体，表示项目的起始时间 l 和结束时间 r
+struct Project {
+    int l, r;
+};
+
+// 查询结构体，表示社员可参加活动的时间区间 [a, b] 以及原始查询编号 id
+struct Query {
+    int a, b, id;
+};
+
+// 树状数组结构体（Fenwick Tree）的封装
+struct fenw_tree {
+    int n;                 // 数组大小
+    vector&lt;int&gt; tree;      // 内部数组（从下标 1 开始使用）
+
+    // 构造函数，初始化大小为 n 的树状数组，所有值初始为 0
+    fenw_tree(int n) : n(n), tree(n + 1, 0) {}
+
+    // 更新函数：将下标 idx 处的值加上 delta
+    void update(int idx, int delta) {
+        for (; idx &lt;= n; idx += idx &amp; -idx) {
+            tree[idx] += delta;
+        }
+    }
+
+    // 前缀和查询：返回区间 [1, idx] 内的累加和
+    int query(int idx) {
+        int sum = 0;
+        for (; idx &gt; 0; idx -= idx &amp; -idx) {
+            sum += tree[idx];
+        }
+        return sum;
+    }
+};
+
+int main() {
+    int n, m;
+    cin &gt;&gt; n &gt;&gt; m;
+
+    // 读入所有项目
+    vector&lt;Project&gt; projects(n);
+    for (int i = 0; i &lt; n; i++) {
+        cin &gt;&gt; projects[i].l &gt;&gt; projects[i].r;
+    }
+
+    // 读入所有查询
+    vector&lt;Query&gt; queries(m);
+    for (int i = 0; i &lt; m; i++) {
+        cin &gt;&gt; queries[i].a &gt;&gt; queries[i].b;
+        queries[i].id = i;
+    }
+
+    // 将项目按 l 降序排序
+    sort(projects.begin(), projects.end(), [](const Project &amp;p1, const Project &amp;p2) {
+        return p1.l &gt; p2.l;
+    });
+
+    // 将查询按 a 降序排序
+    sort(queries.begin(), queries.end(), [](const Query &amp;q1, const Query &amp;q2) {
+        return q1.a &gt; q2.a;
+    });
+
+    // 天数的上界（题中规定最大天数为 100000）
+    const int max_day = 100000;
+    // 构造一个大小为 max_day 的树状数组（下标范围 [1, max_day]）
+    fenw_tree bit(max_day);
+
+    // answer 数组存储每个查询的答案
+    vector&lt;int&gt; answer(m, 0);
+    int proj_idx = 0;
+    // 逐个处理查询
+    // 对于每个查询 q，其要求项目必须满足 l &gt;= q.a 且 r &lt;= q.b
+    // 先把所有满足 l &gt;= q.a 的项目加入树状数组（以其 r 作为下标更新），
+    // 然后对树状数组查询 [1, q.b] 的前缀和即可得到答案
+    for (const auto &amp;q : queries) {
+        while (proj_idx &lt; n &amp;&amp; projects[proj_idx].l &gt;= q.a) {
+            // 在项目的结束时间 r 处加 1
+            bit.update(projects[proj_idx].r, 1);
+            proj_idx++;
+        }
+        // 查询 [1, q.b] 得到的就是 r &lt;= q.b 的项目数
+        answer[q.id] = bit.query(q.b);
+    }
+
+    // 按原始查询顺序输出答案
+    for (int i = 0; i &lt; m; i++) {
+        cout &lt;&lt; answer[i] &lt;&lt; &quot;\n&quot;;
+    }
+
+    return 0;
+}
+</code></pre>
+<p>这里把树状数组换成线段树效果一样。</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/jquery-3.6.0.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
