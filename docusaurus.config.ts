@@ -6,9 +6,9 @@ import rehypeKatex from 'rehype-katex';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
-const repo = "notes-template"
+const repo = "baidu-matiji-weekly-contest-2025"
 const ghName = "finger-bone"
-const title = "my site"
+const title = "马蹄集周赛"
 
 const config: Config = {
   title: title,
