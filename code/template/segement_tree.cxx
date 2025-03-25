@@ -19,14 +19,14 @@ struct SegmentTree {
 
     void update_to(int idx, int target) {
         data[idx + n] = target;
-        for(int i = idx + n; i > 1; i /= 1) {
+        for(int i = idx + n; i > 1; i /= 2) {
             data[i / 2] = data[i] + data[i + 1];
         }
     }
 
     void update_by(int idx, int delta) {
         data[idx + n] += delta;
-        for(int i = idx + n; i > 1; i /= 1) {
+        for(int i = idx + n; i > 1; i /= 2) {
             data[i / 2] += delta;
         }
     }
